@@ -62,7 +62,7 @@ with open(csvpath, newline="") as csvfile:
     # Printing greatest decrease in losses (date and amount) over the entire period
     print(f"Greatest Decrease in Profits: {max_loss_month} (${str(max_loss)})")
 
-#output = subprocess.check_output([sys.executable, "C:/Users/nites/Desktop/python-challenge/PyBank/Main.py"])
-#with open('C:/Users/nites/Desktop/python-challenge/PyBank/PyBank_output.txt', 'wb') as outfile:
-    #outfile.write(output)
-#outfile.close()
+output_file = open('C:/Users/nites/Desktop/python-challenge/PyBank/PyBank_output.txt', 'w')
+output = "Financial Analysis\n----------------------------\nTotal Months : " + str(len(month_name)) + "\nTotal : $" + str(sum(net_profit_loss)) + "\nAverage Change: $" + str(avg_change) + "\nGreatest Increase in Profits: " + max_profit_month + " ($" + str(max_profit) + ")\nGreatest Decrease in Profits: " + max_loss_month + " ($" + str(max_loss) + ")"
+output_file.write(output)
+output_file.close()
