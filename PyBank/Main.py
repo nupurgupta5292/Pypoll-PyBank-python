@@ -35,10 +35,10 @@ with open(csvpath, newline="") as csvfile:
     # Printing net total amount of "Profit/Losses" over the entire period
     print(f"Total : ${str(sum(net_profit_loss))}")
 
-    # Separate loop for calculating the average, maximum and minimum change in profit or loss
+    # Separate loop for calculating change in profit or loss
     for i in range(1,len(net_profit_loss)):
 
-        # Stores change in profit or loss in a list
+        # Stores change in profit or loss from one month to another in a list
         change_profit_loss.append(net_profit_loss[i] - net_profit_loss[i-1])
     
     # Calculating average of the changes in "Profit/Losses" over the entire period to two decimal places
@@ -63,7 +63,6 @@ with open(csvpath, newline="") as csvfile:
     print(f"Greatest Decrease in Profits: {max_loss_month} (${str(max_loss)})")
 
 #output = subprocess.check_output([sys.executable, "C:/Users/nites/Desktop/python-challenge/PyBank/Main.py"])
-#with open('PyBank_output.txt', 'wb') as outfile:
+#with open('C:/Users/nites/Desktop/python-challenge/PyBank/PyBank_output.txt', 'wb') as outfile:
     #outfile.write(output)
-
 #outfile.close()

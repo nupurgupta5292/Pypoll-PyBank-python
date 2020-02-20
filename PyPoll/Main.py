@@ -1,18 +1,21 @@
 # Importing essential modules
 import os
 import csv
-import statistics
 import subprocess, sys
 
-# Empty list for storing names of counties
+# Empty lists for storing names of counties, name of candidates and vote counts for each candidate from csv
 county_name = []
-# Empty list for storing names of candidates
 candidates_name = []
-# Empty list for storing Voter IDs
 voter_ids = []
-# Empty list for storing vote counts for each candidate
+
+# Empty lists for storing vote counts and percentages for each candidate
 candidate_count = []
 candidate_percentage = []
+
+# Empty lists for storing sorted lists of names, vote counts and percentages for each candidate
+candidate_count_sorted = []
+candidate_percentage_sorted = []
+candidates_name_unique_sorted = []
 
 # Setting up path for file
 csvpath = os.path.join("C:/Users/nites/Desktop/UT-TOR-DATA-PT-01-2020-U-C/03-Python/Instructions/PyPoll/Resources","election_data.csv")
@@ -39,31 +42,40 @@ with open(csvpath, newline="") as csvfile:
     candidates_name_unique_set = set(candidates_name)
     # print(candidates_name_unique_set)
 
-    #Transferring unique names from set to another list to enable its use in loops
+    #Creating a list of unique names from set to enable its use in loops
     candidates_name_unique = list(candidates_name_unique_set)
     # print(candidates_name_unique)
 
     # Counting votes received by each candidate and storing it in a separate list
-    candidate_count = [ candidates_name.count(candidates_name_unique[i]) for i in range(0,len(candidates_name_unique)) ]
+    candidate_count = [ candidates_name.count(candidates_name_unique[i]) for i in range(len(candidates_name_unique)) ]
     # print(candidate_count)
 
     # Counting votes received by each candidate and storing it in a separate list
-    candidate_percentage = [((candidate_count[i]/len(voter_ids) * 100)) for i in range(0,len(candidate_count)) ]
+    candidate_percentage = [((candidate_count[i]/len(voter_ids) * 100)) for i in range(len(candidate_count)) ]
     # print(candidate_percentage)
+
+    #Sorting vote count and percentage lists in descending order
+    candidate_count_sorted = sorted(candidate_count,key=None,reverse=True)
+    candidate_percentage_sorted = sorted(candidate_percentage,key=None,reverse=True)
+    # print(candidate_count_sorted)
+    # print(candidate_percentage_sorted)
+
+    #Sorting Candidate name list according to newly sorted candidate count lists
+    candidates_name_unique_sorted = [(candidates_name_unique[candidate_count.index(candidate_count_sorted[i])]) for i in range(len(candidate_count))]
+    #print(candidates_name_unique_sorted)
 
     #Printing Vote count and percentage for each candidate using three different lists or candidate name, vote count and percentage
     for i in range(0,len(candidate_count)):
-        print(f"{candidates_name_unique[i]}: {str(round(candidate_percentage[i],3))}% ({str(candidate_count[i])})") 
+        print(f"{candidates_name_unique_sorted[i]}: {str(round(candidate_percentage_sorted[i]))}% ({str(candidate_count_sorted[i])})") 
 
     print(f"-------------------------")
 
     #Printing the name of the winner of the elections, present on index corressponding to the highest percentage of votes received
-    print(f"Winner: {candidates_name_unique[candidate_percentage.index(max(candidate_percentage))]}")
+    print(f"Winner: {candidates_name_unique[candidate_percentage.index(max(candidate_percentage))]}\n")
 
 #output = subprocess.check_output([sys.executable, "C:/Users/nites/Desktop/python-challenge/PyPoll/Main.py"])
-#with open('PyPoll_output.txt', 'wb') as outfile:
+#with open('C:/Users/nites/Desktop/python-challenge/PyPoll/PyPoll_output.txt', 'wb') as outfile:
     #outfile.write(output)
-
 #outfile.close()
 
 
