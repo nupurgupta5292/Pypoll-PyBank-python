@@ -49,7 +49,7 @@ with open(csvpath, newline="") as csvfile:
     candidate_count = [ candidates_name.count(candidates_name_unique[i]) for i in range(len(candidates_name_unique)) ]
     # print(candidate_count)
 
-    # Counting votes received by each candidate and storing it in a separate list
+    # Calculating votes percentage for each candidate and storing it in a separate list
     candidate_percentage = [((candidate_count[i]/len(voter_ids) * 100)) for i in range(len(candidate_count)) ]
     # print(candidate_percentage)
 
@@ -59,13 +59,13 @@ with open(csvpath, newline="") as csvfile:
     # print(candidate_count_sorted)
     # print(candidate_percentage_sorted)
 
-    #Sorting Candidate name list according to newly sorted candidate count lists
+    #Sorting Candidate name list according to newly sorted candidate count lists so that correct vote count is corresponding to each candidate
     candidates_name_unique_sorted = [(candidates_name_unique[candidate_count.index(candidate_count_sorted[i])]) for i in range(len(candidate_count))]
     #print(candidates_name_unique_sorted)
 
-    #Printing Vote count and percentage for each candidate using three different lists or candidate name, vote count and percentage
+    #Printing Vote count and percentage for each candidate using the three lists for candidate name, vote count and percentage
     for i in range(0,len(candidate_count)):
-        print(f"{candidates_name_unique_sorted[i]}: {str(round(candidate_percentage_sorted[i]))}% ({str(candidate_count_sorted[i])})") 
+        print(f"{candidates_name_unique_sorted[i]}: {str(round(candidate_percentage_sorted[i],3))}% ({str(candidate_count_sorted[i])})") 
     
     print(f"-------------------------")
 
@@ -79,7 +79,7 @@ output_file.write("-------------------------\n")
 output_file.write("Total Votes: " + str(len(voter_ids)) + "\n")
 output_file.write("-------------------------\n")
 for i in range(0,len(candidate_count)):
-    output_file.write(candidates_name_unique_sorted[i] + ": " + str(round(candidate_percentage_sorted[i])) + "% " + "(" + str(candidate_count_sorted[i]) + ")\n")
+    output_file.write(candidates_name_unique_sorted[i] + ": " + str(round(candidate_percentage_sorted[i],3)) + "% " + "(" + str(candidate_count_sorted[i]) + ")\n")
 output_file.write("-------------------------\n")
 output_file.write("Winner: " + candidates_name_unique[candidate_percentage.index(max(candidate_percentage))] + "\n")
 output_file.close()
