@@ -2,7 +2,6 @@
 import os
 import csv
 import statistics
-import subprocess, sys
 
 # Setting up path for file
 csvpath = os.path.join("C:/Users/nites/Desktop/UT-TOR-DATA-PT-01-2020-U-C/03-Python/Instructions/PyBank/Resources","budget_data.csv")
@@ -62,6 +61,7 @@ with open(csvpath, newline="") as csvfile:
     # Printing greatest decrease in losses (date and amount) over the entire period
     print(f"Greatest Decrease in Profits: {max_loss_month} (${str(max_loss)})")
 
+# Exporting the output to a text file
 output_file = open('C:/Users/nites/Desktop/python-challenge/PyBank/PyBank_output.txt', 'w')
 output = "Financial Analysis\n----------------------------\nTotal Months : " + str(len(month_name)) + "\nTotal : $" + str(sum(net_profit_loss)) + "\nAverage Change: $" + str(avg_change) + "\nGreatest Increase in Profits: " + max_profit_month + " ($" + str(max_profit) + ")\nGreatest Decrease in Profits: " + max_loss_month + " ($" + str(max_loss) + ")"
 output_file.write(output)

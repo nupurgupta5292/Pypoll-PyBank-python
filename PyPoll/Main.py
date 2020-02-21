@@ -1,7 +1,6 @@
 # Importing essential modules
 import os
 import csv
-import subprocess, sys
 
 # Empty lists for storing names of counties, name of candidates and vote counts for each candidate from csv
 county_name = []
@@ -67,16 +66,23 @@ with open(csvpath, newline="") as csvfile:
     #Printing Vote count and percentage for each candidate using three different lists or candidate name, vote count and percentage
     for i in range(0,len(candidate_count)):
         print(f"{candidates_name_unique_sorted[i]}: {str(round(candidate_percentage_sorted[i]))}% ({str(candidate_count_sorted[i])})") 
-
+    
     print(f"-------------------------")
 
     #Printing the name of the winner of the elections, present on index corressponding to the highest percentage of votes received
     print(f"Winner: {candidates_name_unique[candidate_percentage.index(max(candidate_percentage))]}\n")
 
-#output = subprocess.check_output([sys.executable, "C:/Users/nites/Desktop/python-challenge/PyPoll/Main.py"])
-#with open('C:/Users/nites/Desktop/python-challenge/PyPoll/PyPoll_output.txt', 'wb') as outfile:
-    #outfile.write(output)
-#outfile.close()
+# Exporting the output to a text file
+output_file = open('C:/Users/nites/Desktop/python-challenge/PyPoll/PyPoll_output.txt', 'w')
+output_file.write("Election Results\n")
+output_file.write("-------------------------\n")
+output_file.write("Total Votes: " + str(len(voter_ids)) + "\n")
+output_file.write("-------------------------\n")
+for i in range(0,len(candidate_count)):
+    output_file.write(candidates_name_unique_sorted[i] + ": " + str(round(candidate_percentage_sorted[i])) + "% " + "(" + str(candidate_count_sorted[i]) + ")\n")
+output_file.write("-------------------------\n")
+output_file.write("Winner: " + candidates_name_unique[candidate_percentage.index(max(candidate_percentage))] + "\n")
+output_file.close()
 
 
 
